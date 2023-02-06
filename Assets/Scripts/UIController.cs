@@ -7,25 +7,21 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     // ゲームオーバーテキスト
-    private GameObject gameOverText;
-
+    private Text gameOverText;
     // 走行距離テキスト
-    private GameObject runLengthText;
-
+    private Text runLengthText;
     // 走った距離
-    private float len = 0;
-
+    private float length = 0;
     // 走る速度
     private float speed = 5f;
-
     // ゲームオーバーの判定
     private bool isGameOver = false;
 
     void Start()
     {
         // シーンビューからオブジェクトの実体を検索する
-        gameOverText = GameObject.Find("GameOver");
-        runLengthText = GameObject.Find("RunLength");
+        gameOverText = GameObject.Find("GameOver").GetComponent<Text>();
+        runLengthText = GameObject.Find("RunLength").GetComponent<Text>();
     }
 
     void Update()
@@ -33,28 +29,20 @@ public class UIController : MonoBehaviour
         if (!isGameOver)
         {
             // 走った距離を更新する
-            len += speed * Time.deltaTime;
-
+            length += speed * Time.deltaTime;
             // 走った距離を表示する
-            runLengthText.GetComponent<Text>().text = "Distance:  " + len.ToString("F2") + "m";
+            runLengthText.text = $"Distance: {length.ToString("F2")}m";
         }
 
-        // ゲームオーバーになった場合
-        if (isGameOver == true)
-        {
-            // クリックされたらシーンをロードする
-            if (Input.GetMouseButtonDown(0))
-            {
-                //SampleSceneを読み込む
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+        // ゲームオーバー後クリックしたら、シーンを読み込む
+        if (isGameOver && Input.GetMouseButtonDown(0))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GameOver()
     {
         // ゲームオーバーになったときに、画面上にゲームオーバを表示する
-        gameOverText.GetComponent<Text>().text = "Game Over";
+        gameOverText.text = "Game Over";
         isGameOver = true;
     }
 }

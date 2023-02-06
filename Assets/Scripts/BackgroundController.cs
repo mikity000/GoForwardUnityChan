@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundController : MonoBehaviour
 {
     // スクロール速度
-    private float scrollSpeed = -1;
+    private float scrollSpeed = -10;
     // 背景終了位置
     private float deadLine = -16;
     // 背景開始位置
@@ -18,8 +18,6 @@ public class BackgroundController : MonoBehaviour
 
         // 画面外に出たら、画面右端に移動する
         if (transform.position.x < deadLine)
-        {
             transform.position = new Vector2(startLine, 0);
-        }
     }
 }

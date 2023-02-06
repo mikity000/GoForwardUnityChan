@@ -6,26 +6,20 @@ public class CubeGenerator : MonoBehaviour
 {
     // キューブのPrefab
     public GameObject cubePrefab;
-
     // 時間計測用の変数
     private float delta = 0;
-
     // キューブの生成間隔
     private float span = 1.0f;
-
     // キューブの生成位置：X座標
     private float genPosX = 12;
-
     // キューブの生成位置オフセット
     private float offsetY = 0.3f;
     // キューブの縦方向の間隔
     private float spaceY = 6.9f;
-
     // キューブの生成位置オフセット
     private float offsetX = 0.5f;
     // キューブの横方向の間隔
     private float spaceX = 0.4f;
-
     // キューブの生成個数の上限
     private int maxBlockNum = 4;
 
@@ -44,8 +38,8 @@ public class CubeGenerator : MonoBehaviour
             for (int i = 0; i < n; i++)
             {
                 // キューブの生成
-                GameObject go = Instantiate(cubePrefab);
-                go.transform.position = new Vector2(genPosX, offsetY + i * spaceY);
+                GameObject cube = Instantiate(cubePrefab);
+                cube.transform.position = new Vector2(genPosX, offsetY + i * spaceY);
             }
             // 次のキューブまでの生成時間を決める
             span = offsetX + spaceX * n;

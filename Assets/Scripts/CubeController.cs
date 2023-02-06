@@ -6,10 +6,8 @@ public class CubeController : MonoBehaviour
 {
     // キューブの移動速度
     private float speed = -12;
-
     // 消滅位置
     private float deadLine = -10;
-
     //ブロックの音
     private AudioSource audioSource;
 
@@ -22,23 +20,14 @@ public class CubeController : MonoBehaviour
     {
         // キューブを移動させる
         transform.Translate(speed * Time.deltaTime, 0, 0);
-
         // 画面外に出たら破棄する
         if (transform.position.x < deadLine)
-        {
             Destroy(gameObject);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D c)
     {
-        if (c.gameObject.CompareTag("ground"))
-        {
+        if (c.gameObject.CompareTag("ground") || c.gameObject.CompareTag("cube"))
             audioSource.Play();
-        }
-        else if (c.gameObject.CompareTag("cube"))
-        {
-            audioSource.Play();
-        }
     }
 }
